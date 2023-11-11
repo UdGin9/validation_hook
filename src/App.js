@@ -49,7 +49,7 @@ const useValidation = (value,validations) => {
     }
 }
 
-const useInput = (initialValue,validations,inputValid) => {
+const useInput = (initialValue,validations) => {
     const [value,setValue] = useState(initialValue);
     const [isDirty,setIsDirty] = useState(false)
     const valid = useValidation(value,validations)
@@ -65,8 +65,7 @@ const useInput = (initialValue,validations,inputValid) => {
     onChange,
     onBlur,
     ...valid,
-    isDirty,
-    inputValid
+    isDirty
   }
 }
 
@@ -86,7 +85,7 @@ function App() {
             {password.isDirty && password.minLengthError && <div style={{color:"red",padding:"5px"}}>Слишком короткий пароль</div>}
             {password.isDirty && password.maxLengthError && <div style={{color:"red",padding:"5px"}}>Слишком длинный пароль</div>}
             <input name={password.value.toString()} onBlur={e => password.onBlur(e)} onChange={e => password.onChange(e)} type="password" placeholder="Введите пароль" className="input"/>
-            <button type="submit" disabled={!email.inputValid || !password.inputValid} className="button">Авторизироваться</button>
+            <button className="button" type="submit" disabled={!email.inputValid || !password.inputValid}>Авторизироваться</button>
         </form>
     </div>
   );
